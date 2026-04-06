@@ -21,6 +21,12 @@ export const LandingPage: React.FC = () => {
                 Features
               </a>
               <Link
+                to="/teams"
+                className="text-slate-300 hover:text-white transition"
+              >
+                Teams
+              </Link>
+              <Link
                 to="/auth/login"
                 className="px-4 py-2 text-slate-300 hover:text-white transition"
               >
@@ -47,6 +53,12 @@ export const LandingPage: React.FC = () => {
               <a href="#features" className="block px-4 py-2 text-slate-300 hover:text-white">
                 Features
               </a>
+              <Link
+                to="/teams"
+                className="block px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Teams
+              </Link>
               <Link
                 to="/auth/login"
                 className="block px-4 py-2 text-slate-300 hover:text-white"

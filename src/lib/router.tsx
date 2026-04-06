@@ -14,6 +14,7 @@ import LessonViewerPage from '../pages/LessonViewerPage';
 import DiscussionsPage from '../pages/DiscussionsPage';
 import InstructorDashboardPage from '../pages/InstructorDashboardPage';
 import LandingPage from '../pages/LandingPage';
+import TeamsPage from '../pages/TeamsPage';
 
 const Router: React.FC = () => {
   const { isAuthenticated, user, isLoading, getCurrentUser } = useAuthStore();
@@ -61,6 +62,9 @@ const Router: React.FC = () => {
       <Routes>
         {/* Landing Page */}
         <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <LandingPage />} />
+
+        {/* Public Pages */}
+        <Route path="/teams" element={<TeamsPage />} />
 
         {/* Auth Routes */}
         <Route path="/auth/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage />} />
