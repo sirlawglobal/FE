@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '../contexts/authContext';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -16,7 +16,14 @@ import InstructorDashboardPage from '../pages/InstructorDashboardPage';
 import LandingPage from '../pages/LandingPage';
 
 const Router: React.FC = () => {
-  const { isAuthenticated, isLoading } = useAuthStore();
+  const { isAuthenticated, isLoading, getCurrentUser } = useAuthStore();
+
+  useEffect(() => {
+    // Only fetch user if we have a token but no user object yet
+    if (isAuthenticated) {
+      getCurrentUser();
+    }
+  }, [isAuthenticated, getCurrentUser]);
 
   return (
     <BrowserRouter>
