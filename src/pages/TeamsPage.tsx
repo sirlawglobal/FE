@@ -10,27 +10,25 @@ import toast from 'react-hot-toast';
 const TRACKS = [
   'Frontend Development',
   'Backend Development',
-  'Mobile Development',
   'UI/UX Design',
-  'DevOps & Cloud',
-  'Data Science & AI',
-  'Cybersecurity',
   'Product Management',
-  'QA & Testing',
-  'Blockchain',
+  'Social Media Management',
+  'Customer Representative',
+  'Virtual Assistant',
+  'Graphic Design'
 ];
 
 const TRACK_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  'Frontend Development':  { bg: 'bg-blue-500/20',   text: 'text-blue-300',   border: 'border-blue-500/40' },
-  'Backend Development':   { bg: 'bg-green-500/20',  text: 'text-green-300',  border: 'border-green-500/40' },
-  'Mobile Development':    { bg: 'bg-purple-500/20', text: 'text-purple-300', border: 'border-purple-500/40' },
-  'UI/UX Design':          { bg: 'bg-pink-500/20',   text: 'text-pink-300',   border: 'border-pink-500/40' },
-  'DevOps & Cloud':        { bg: 'bg-orange-500/20', text: 'text-orange-300', border: 'border-orange-500/40' },
-  'Data Science & AI':     { bg: 'bg-cyan-500/20',   text: 'text-cyan-300',   border: 'border-cyan-500/40' },
-  'Cybersecurity':         { bg: 'bg-red-500/20',    text: 'text-red-300',    border: 'border-red-500/40' },
-  'Product Management':    { bg: 'bg-yellow-500/20', text: 'text-yellow-300', border: 'border-yellow-500/40' },
-  'QA & Testing':          { bg: 'bg-teal-500/20',   text: 'text-teal-300',   border: 'border-teal-500/40' },
-  'Blockchain':            { bg: 'bg-indigo-500/20', text: 'text-indigo-300', border: 'border-indigo-500/40' },
+  'Frontend Development': { bg: 'bg-blue-500/20', text: 'text-blue-300', border: 'border-blue-500/40' },
+  'Backend Development': { bg: 'bg-green-500/20', text: 'text-green-300', border: 'border-green-500/40' },
+  'Mobile Development': { bg: 'bg-purple-500/20', text: 'text-purple-300', border: 'border-purple-500/40' },
+  'UI/UX Design': { bg: 'bg-pink-500/20', text: 'text-pink-300', border: 'border-pink-500/40' },
+  'DevOps & Cloud': { bg: 'bg-orange-500/20', text: 'text-orange-300', border: 'border-orange-500/40' },
+  'Data Science & AI': { bg: 'bg-cyan-500/20', text: 'text-cyan-300', border: 'border-cyan-500/40' },
+  'Cybersecurity': { bg: 'bg-red-500/20', text: 'text-red-300', border: 'border-red-500/40' },
+  'Product Management': { bg: 'bg-yellow-500/20', text: 'text-yellow-300', border: 'border-yellow-500/40' },
+  'QA & Testing': { bg: 'bg-teal-500/20', text: 'text-teal-300', border: 'border-teal-500/40' },
+  'Blockchain': { bg: 'bg-indigo-500/20', text: 'text-indigo-300', border: 'border-indigo-500/40' },
 };
 
 function getTrackStyle(track: string) {
@@ -40,10 +38,21 @@ function getTrackStyle(track: string) {
 function getInitials(name: string) {
   return name
     .split(' ')
+    .filter(Boolean)
     .map((n) => n[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);
+}
+
+function optimizeCloudinaryUrl(url: string | null) {
+  if (!url || !url.includes('cloudinary.com')) return url;
+  // Inject transformation parameters for better performance
+  // q_auto: automatic quality, f_auto: automatic format, w_200,h_200,c_fill: thumbnail
+  if (url.includes('/upload/')) {
+    return url.replace('/upload/', '/upload/q_auto,f_auto,w_200,h_200,c_fill/');
+  }
+  return url;
 }
 
 // ─── Modal ────────────────────────────────────────────────────────────────────
@@ -234,8 +243,9 @@ const MemberCard: React.FC<{ member: TeamMember; index: number }> = ({ member, i
       <div className="relative mb-4">
         {member.profilePicture ? (
           <img
-            src={member.profilePicture}
+            src={optimizeCloudinaryUrl(member.profilePicture)!}
             alt={member.fullName}
+            loading="lazy"
             className="w-20 h-20 rounded-full object-cover border-2 border-slate-600 group-hover:border-blue-500/60 transition"
           />
         ) : (
@@ -291,9 +301,9 @@ const TeamsPage: React.FC = () => {
     setMembers((prev) => [member, ...prev]);
   };
 
-  const uniqueTracks = ['All', ...Array.from(new Set(members.map((m) => m.track)))];
+  const uniqueTracks = ['All', ...Array.from(new Set((Array.isArray(members) ? members : []).map((m) => m.track)))];
 
-  const filtered = members.filter((m) => {
+  const filtered = (Array.isArray(members) ? members : []).filter((m) => {
     const matchesSearch = m.fullName.toLowerCase().includes(search.toLowerCase());
     const matchesTrack = selectedTrack === 'All' || m.track === selectedTrack;
     return matchesSearch && matchesTrack;
@@ -407,11 +417,10 @@ const TeamsPage: React.FC = () => {
                 <button
                   key={t}
                   onClick={() => setSelectedTrack(t)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${
-                    selectedTrack === t
-                      ? 'bg-blue-500 border-blue-500 text-white'
-                      : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white'
-                  }`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${selectedTrack === t
+                    ? 'bg-blue-500 border-blue-500 text-white'
+                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white'
+                    }`}
                 >
                   {t}
                 </button>

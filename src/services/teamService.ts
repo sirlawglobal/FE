@@ -10,7 +10,7 @@ export interface TeamMember {
 
 export const teamService = {
   async getAll(): Promise<TeamMember[]> {
-    const response = await apiClient.get<TeamMember[]>('/team-members');
+    const response = await apiClient.get<TeamMember[]>('team-members');
     return response.data;
   },
 
@@ -22,7 +22,7 @@ export const teamService = {
       formData.append('profilePicture', data.profilePicture);
     }
 
-    const response = await apiClient.post<TeamMember>('/team-members', formData, {
+    const response = await apiClient.post<TeamMember>('team-members', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;
