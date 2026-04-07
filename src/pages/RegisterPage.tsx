@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../contexts/authContext';
-import { AlertCircle, UserPlus } from 'lucide-react';
+import { AlertCircle, UserPlus, BookOpen } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 export const RegisterPage: React.FC = () => {
@@ -57,7 +57,19 @@ export const RegisterPage: React.FC = () => {
   const displayError = localError || error;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 relative">
+      {/* Logo */}
+      <div className="absolute top-8 left-8">
+        <Link to="/" className="flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20">
+            <BookOpen className="w-5 h-5 text-white" />
+          </div>
+          <span className="text-2xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent whitespace-nowrap">
+            TalentFlow
+          </span>
+        </Link>
+      </div>
+
       <div className="w-full max-w-md">
         <div className="bg-slate-800 rounded-lg shadow-xl p-8">
           <div className="text-center mb-8">

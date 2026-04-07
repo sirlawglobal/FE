@@ -352,6 +352,7 @@ const TeamsPage: React.FC = () => {
             <div className="hidden md:flex items-center gap-8">
               <Link to="/#features" className="text-slate-300 hover:text-white transition">Features</Link>
               <Link to="/teams" className="text-white font-semibold border-b-2 border-blue-400 pb-0.5">Teams</Link>
+              <Link to="/courses" className="text-slate-300 hover:text-white transition">Courses</Link>
               <Link to="/auth/login" className="px-4 py-2 text-slate-300 hover:text-white transition">Sign In</Link>
               <Link to="/auth/register" className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-lg transition">
                 Get Started
@@ -365,6 +366,7 @@ const TeamsPage: React.FC = () => {
             <div className="md:hidden mt-4 space-y-2">
               <Link to="/#features" className="block px-4 py-2 text-slate-300 hover:text-white">Features</Link>
               <Link to="/teams" className="block px-4 py-2 text-blue-400 font-semibold">Teams</Link>
+              <Link to="/courses" className="block px-4 py-2 text-slate-300 hover:text-white">Courses</Link>
               <Link to="/auth/login" className="block px-4 py-2 text-slate-300 hover:text-white">Sign In</Link>
               <Link to="/auth/register" className="block px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg text-center">
                 Get Started

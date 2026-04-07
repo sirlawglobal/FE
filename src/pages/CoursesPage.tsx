@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Loader, Search, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { coursesService, type CoursesResponse } from '../services/coursesService';
 import { enrollmentsService } from '../services/enrollmentsService';
 import { useAuthStore } from '../contexts/authContext';
@@ -8,6 +8,7 @@ import AppLayout from '../components/layout/AppLayout';
 
 export const CoursesPage: React.FC = () => {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
   const [coursesData, setCoursesData] = useState<CoursesResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -62,6 +63,10 @@ export const CoursesPage: React.FC = () => {
   };
 
   const handleEnrollCourse = async (courseId: string) => {
+    if (!user) {
+      navigate('/auth/login');
+      return;
+    }
     try {
       setEnrolling(courseId);
       await enrollmentsService.enrollInCourse(courseId);
