@@ -34,12 +34,18 @@ class APIClient {
       (response) => response,
       (error) => {
         if (error.response?.status === 401) {
-          // Only redirect if NOT on the login page and NOT a login request
-          const isLoginPage = window.location.pathname === '/auth/login';
+          this.clearToken();
+          
+          const currentPath = window.location.pathname;
+          const isPublicPage = 
+            currentPath === '/' || 
+            currentPath.startsWith('/auth/') || 
+            currentPath.startsWith('/teams') || 
+            currentPath.startsWith('/courses');
+          
           const isLoginRequest = error.config.url?.includes('/auth/login');
           
-          if (!isLoginPage && !isLoginRequest) {
-            this.clearToken();
+          if (!isPublicPage && !isLoginRequest) {
             window.location.href = '/auth/login';
           }
         }

@@ -19,8 +19,10 @@ export const CoursesPage: React.FC = () => {
 
   useEffect(() => {
     // Fetch user enrollments to show enrolled status
-    fetchEnrolledCourses();
-  }, []);
+    if (user) {
+      fetchEnrolledCourses();
+    }
+  }, [user]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,6 +37,7 @@ export const CoursesPage: React.FC = () => {
   }, [currentPage]);
 
   const fetchEnrolledCourses = async () => {
+    if (!user) return;
     try {
       const enrollments = await enrollmentsService.getUserEnrollments();
       const ids = new Set(enrollments.map(e => e.courseId));

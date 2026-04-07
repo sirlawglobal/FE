@@ -39,9 +39,11 @@ export const CourseDetailsPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       fetchCourseDetails(id);
-      checkEnrollment(id);
+      if (user) {
+        checkEnrollment(id);
+      }
     }
-  }, [id]);
+  }, [id, user]);
 
   const fetchCourseDetails = async (courseId: string) => {
     try {
@@ -71,6 +73,10 @@ export const CourseDetailsPage: React.FC = () => {
   };
 
   const checkEnrollment = async (courseId: string) => {
+    if (!user) {
+      setEnrolled(false);
+      return;
+    }
     try {
       const enrollments = await enrollmentsService.getUserEnrollments();
       const isEnrolled = enrollments.some(e => e.courseId === courseId);
