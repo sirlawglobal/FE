@@ -65,6 +65,8 @@ class APIClient {
 
   clearToken(): void {
     localStorage.removeItem(this.tokenKey);
+    // Also clear Zustand persisted auth store to prevent redirect loops
+    localStorage.removeItem('auth-store');
   }
 
   isAuthenticated(): boolean {
