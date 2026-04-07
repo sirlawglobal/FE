@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 
   return (
     <aside
-      className={`fixed left-0 top-0 h-screen bg-slate-900 border-r border-slate-700/50 z-40 transition-all duration-300 flex flex-col ${
+      className={`h-full bg-slate-900 border-r border-slate-700/50 z-40 transition-all duration-300 flex flex-col ${
         collapsed ? 'w-[68px]' : 'w-[240px]'
       }`}
     >
@@ -89,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
       </nav>
 
       {/* Collapse Toggle */}
-      <div className="p-2 border-t border-slate-700/50 flex-shrink-0">
+      <div className="p-2 pb-6 border-t border-slate-700/50 flex-shrink-0">
         <button
           onClick={onToggle}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
