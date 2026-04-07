@@ -22,11 +22,13 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   const isInstructor = user?.role === 'INSTRUCTOR';
   const isAdmin = user?.role === 'ADMIN';
 
-  const navItems = [
+  const navItems = user ? [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/courses', label: 'Explore Courses', icon: BookOpen },
     { path: '/my-courses', label: 'My Learning', icon: GraduationCap },
     { path: '/discussions', label: 'Discussions', icon: MessageSquare },
+  ] : [
+    { path: '/courses', label: 'Explore Courses', icon: BookOpen },
   ];
 
   if (isInstructor || isAdmin) {
@@ -46,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     >
       {/* Logo */}
       <div className="h-16 flex items-center px-4 border-b border-slate-700/50 flex-shrink-0">
-        <Link to="/dashboard" className="flex items-center gap-3 min-w-0">
+        <Link to={user ? "/dashboard" : "/"} className="flex items-center gap-3 min-w-0">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
             <BookOpen className="w-4 h-4 text-white" />
           </div>

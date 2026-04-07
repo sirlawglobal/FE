@@ -29,26 +29,38 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             <div /> {/* Spacer */}
 
             <div className="flex items-center gap-3">
-              {/* User Badge */}
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <User className="w-3.5 h-3.5 text-white" />
-                </div>
-                <span className="text-sm text-slate-300 font-medium hidden sm:inline">
-                  {user?.firstName} {user?.lastName}
-                </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 font-semibold hidden sm:inline">
-                  {user?.role}
-                </span>
-              </div>
+              {user ? (
+                <>
+                  {/* User Badge */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                      <User className="w-3.5 h-3.5 text-white" />
+                    </div>
+                    <span className="text-sm text-slate-300 font-medium hidden sm:inline">
+                      {user.firstName} {user.lastName}
+                    </span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 font-semibold hidden sm:inline">
+                      {user.role}
+                    </span>
+                  </div>
 
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-red-500/20 hover:text-red-400 text-slate-400 rounded-lg transition text-sm border border-slate-700 hover:border-red-500/30"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-red-500/20 hover:text-red-400 text-slate-400 rounded-lg transition text-sm border border-slate-700 hover:border-red-500/30"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span className="hidden sm:inline">Logout</span>
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => navigate('/auth/login')}
+                  className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-lg transition text-sm font-bold shadow-lg shadow-blue-500/20"
+                >
+                  <User className="w-4 h-4" />
+                  <span>Sign In</span>
+                </button>
+              )}
             </div>
           </div>
         </header>

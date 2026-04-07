@@ -65,6 +65,8 @@ const Router: React.FC = () => {
 
         {/* Public Pages */}
         <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/courses/:id" element={<CourseDetailsPage />} />
 
         {/* Auth Routes */}
         <Route path="/auth/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage />} />
@@ -73,8 +75,6 @@ const Router: React.FC = () => {
 
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-        <Route path="/courses" element={<ProtectedRoute><CoursesPage /></ProtectedRoute>} />
-        <Route path="/courses/:id" element={<ProtectedRoute><CourseDetailsPage /></ProtectedRoute>} />
         <Route path="/my-courses" element={<ProtectedRoute><MyCoursesPage /></ProtectedRoute>} />
         <Route path="/lessons/:id" element={<ProtectedRoute><LessonViewerPage /></ProtectedRoute>} />
         <Route path="/discussions" element={<ProtectedRoute><DiscussionsPage /></ProtectedRoute>} />

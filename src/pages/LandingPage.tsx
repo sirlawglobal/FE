@@ -27,6 +27,12 @@ export const LandingPage: React.FC = () => {
                 Teams
               </Link>
               <Link
+                to="/courses"
+                className="text-slate-300 hover:text-white transition"
+              >
+                Courses
+              </Link>
+              <Link
                 to="/auth/login"
                 className="px-4 py-2 text-slate-300 hover:text-white transition"
               >
@@ -58,6 +64,12 @@ export const LandingPage: React.FC = () => {
                 className="block px-4 py-2 text-slate-300 hover:text-white"
               >
                 Teams
+              </Link>
+              <Link
+                to="/courses"
+                className="block px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Courses
               </Link>
               <Link
                 to="/auth/login"

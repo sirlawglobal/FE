@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 
 export default function Hero() {
@@ -37,14 +38,14 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="btn btn-primary btn-lg group">
+            <Link to="/auth/register" className="btn btn-primary btn-lg group">
               Get Started
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="btn btn-secondary btn-lg">
+            </Link>
+            <Link to="/courses" className="btn btn-secondary btn-lg">
               <Play size={20} />
-              Watch Demo
-            </button>
+              Browse Courses
+            </Link>
           </div>
 
           {/* Stats */}
