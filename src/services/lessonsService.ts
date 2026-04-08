@@ -23,6 +23,7 @@ export interface Lesson {
     title: string;
     order: number;
   };
+  isCompleted?: boolean;
 }
 
 export interface CreateLessonRequest {

@@ -27,6 +27,11 @@ export const LessonViewerPage: React.FC = () => {
       setError(null);
       const data = await lessonsService.getLessonById(lessonId);
       setLesson(data);
+      if (data.isCompleted) {
+        setCompleted(true);
+      } else {
+        setCompleted(false);
+      }
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to load lesson';
       setError(errorMsg);
