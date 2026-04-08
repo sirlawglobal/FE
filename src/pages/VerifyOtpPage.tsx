@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuthStore } from '../contexts/authContext';
-import { AlertCircle, CheckCircle, Mail, BookOpen } from 'lucide-react';
+import { AlertCircle, CheckCircle, Mail } from 'lucide-react';
+import { Logo } from '../components/ui/Logo';
 
 export const VerifyOtpPage: React.FC = () => {
   const navigate = useNavigate();
@@ -119,52 +120,45 @@ export const VerifyOtpPage: React.FC = () => {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4 transition-colors duration-300">
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500/20 rounded-full mb-6">
-            <CheckCircle className="w-12 h-12 text-green-500" />
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-light-green/10 rounded-[32px] mb-8 animate-bounce-subtle">
+            <CheckCircle className="w-12 h-12 text-light-green" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Email Verified!</h2>
-          <p className="text-slate-400">Redirecting to your dashboard...</p>
+          <h2 className="text-4xl font-display font-bold text-foreground mb-3 tracking-tight">Identity Verified</h2>
+          <p className="text-foreground/40 font-medium text-lg">Your gateway to learning is now open...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 relative">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 relative transition-colors duration-300">
       {/* Logo */}
       <div className="absolute top-8 left-8">
-        <Link to="/" className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent whitespace-nowrap">
-            TalentFlow
-          </span>
-        </Link>
+        <Logo size="lg" />
       </div>
 
       <div className="w-full max-w-md">
-        <div className="bg-slate-800 rounded-lg shadow-xl p-8">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg mb-4">
-              <Mail className="w-8 h-8 text-white" />
+        <div className="card shadow-2xl p-8 border border-border">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-primary-teal/10 text-primary-teal rounded-[24px] mb-6">
+              <Mail className="w-10 h-10" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Verify Email</h1>
-            <p className="text-slate-400">Enter the 6-digit code sent to</p>
-            <p className="text-slate-300 font-semibold break-all">{email}</p>
+            <h1 className="text-4xl font-display font-bold text-foreground mb-2 tracking-tight">Verify Securely</h1>
+            <p className="text-foreground/50 font-medium">Enter the 6-digit access code sent to</p>
+            <p className="text-primary-teal font-black mt-1 break-all px-2">{email}</p>
           </div>
 
           {displayError && (
-            <div className="mb-6 flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-              <p className="text-red-500 text-sm">{displayError}</p>
+            <div className="mb-6 flex items-start gap-4 bg-red-500/10 border border-red-500/30 rounded-2xl p-4">
+              <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-red-500 font-medium text-sm leading-relaxed">{displayError}</p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex justify-center gap-2">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="flex justify-between gap-2 px-1">
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <input
                   key={index}
@@ -181,7 +175,7 @@ export const VerifyOtpPage: React.FC = () => {
                     }
                   }}
                   disabled={isLoading}
-                  className="w-12 h-12 text-center text-xl font-bold bg-slate-700 border-2 border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition disabled:opacity-50"
+                  className="w-12 h-16 text-center text-3xl font-display font-black bg-background border-2 border-border rounded-2xl text-foreground focus:outline-none focus:ring-4 focus:ring-primary-teal/20 focus:border-primary-teal transition-all disabled:opacity-50"
                 />
               ))}
             </div>
@@ -189,26 +183,26 @@ export const VerifyOtpPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading || otp.length !== 6}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-slate-600 disabled:to-slate-600 text-white font-semibold py-2.5 rounded-lg transition duration-200 disabled:cursor-not-allowed"
+              className="w-full btn-primary py-4 mt-4 text-lg font-bold"
             >
-              {isLoading ? 'Verifying...' : 'Verify Code'}
+              {isLoading ? 'Verifying Identity...' : 'Confirm Secure Code'}
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-700">
-            <p className="text-slate-400 text-center text-sm mb-4">
-              {canResend ? "Didn't receive the code?" : `Resend in ${timeLeft}s`}
+          <div className="mt-10 pt-8 border-t border-border">
+            <p className="text-foreground/40 text-center text-sm font-medium mb-6">
+              {canResend ? "Code not arrived?" : `Resubmit in ${timeLeft}s`}
             </p>
             <button
               onClick={handleResendOtp}
               disabled={!canResend || isLoading}
-              className="w-full py-2 text-purple-400 hover:text-purple-300 font-semibold disabled:text-slate-500 disabled:cursor-not-allowed transition"
+              className="w-full py-4 text-primary-teal bg-primary-teal/5 hover:bg-primary-teal/10 rounded-2xl font-bold disabled:text-foreground/20 disabled:bg-transparent disabled:cursor-not-allowed transition-all"
             >
-              Resend Code
+              Request New Pulse
             </button>
-            <p className="text-slate-400 text-center text-sm mt-4">
-              <Link to="/auth/login" className="text-purple-400 hover:text-purple-300 font-semibold transition">
-                Back to Sign In
+            <p className="text-foreground/50 text-center text-sm mt-8">
+              <Link to="/auth/login" className="text-primary-teal hover:opacity-80 font-bold transition">
+                Return to Sanctuary
               </Link>
             </p>
           </div>

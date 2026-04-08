@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Users, Zap, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import Hero from '../components/Hero';
+import { Logo } from '../components/ui/Logo';
 
 export const LandingPage: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +16,7 @@ export const LandingPage: React.FC = () => {
       <nav className="bg-background/80 backdrop-blur-md border-b border-border/40 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-display font-bold text-primary-teal tracking-tight">
-              TalentFlow
-            </div>
+            <Logo size="md" />
             <div className="hidden md:flex items-center gap-10">
               <a href="#features" className="text-sm font-medium text-foreground/60 hover:text-primary-teal transition-colors">
                 Features
@@ -170,9 +169,7 @@ export const LandingPage: React.FC = () => {
       {/* Footer - Minimal */}
       <footer className="border-t border-border/40 py-20 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-foreground/40 text-sm">
-          <div className="text-2xl font-display font-bold text-primary-teal">
-            TalentFlow
-          </div>
+          <Logo size="md" />
           <div className="flex gap-10">
             <a href="#" className="hover:text-primary-teal transition-colors">Twitter</a>
             <a href="#" className="hover:text-primary-teal transition-colors">LinkedIn</a>

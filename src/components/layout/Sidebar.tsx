@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../contexts/authContext';
+import { Logo } from '../ui/Logo';
 import {
   LayoutDashboard,
   BookOpen,
@@ -48,16 +49,11 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     >
       {/* Logo */}
       <div className="h-16 flex items-center px-4 border-b border-border flex-shrink-0">
-        <Link to={user ? "/dashboard" : "/"} className="flex items-center gap-3 min-w-0">
-          <div className="w-8 h-8 rounded-lg bg-primary-teal flex items-center justify-center flex-shrink-0">
-            <BookOpen className="w-4 h-4 text-white" />
-          </div>
-          {!collapsed && (
-            <span className="text-lg font-bold text-primary-teal whitespace-nowrap">
-              TalentFlow
-            </span>
-          )}
-        </Link>
+        <Logo 
+          showText={!collapsed} 
+          size="sm" 
+          className="min-w-0" 
+        />
       </div>
 
       {/* Navigation */}

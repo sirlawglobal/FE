@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../contexts/authContext';
-import { AlertCircle, LogIn, BookOpen } from 'lucide-react';
+import { AlertCircle, LogIn } from 'lucide-react';
+import { Logo } from '../components/ui/Logo';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -42,14 +43,7 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       {/* Logo */}
       <div className="absolute top-8 left-8">
-        <Link to="/" className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-primary-teal flex items-center justify-center flex-shrink-0 shadow-glow-sm">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-2xl font-bold text-primary-teal whitespace-nowrap">
-            TalentFlow
-          </span>
-        </Link>
+        <Logo size="lg" />
       </div>
 
       <div className="w-full max-w-md">

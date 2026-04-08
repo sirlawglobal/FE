@@ -229,10 +229,10 @@ export const CourseDetailsPage: React.FC = () => {
 
   const getContentIcon = (type?: ContentType) => {
     switch (type) {
-      case ContentType.VIDEO: return <Video className="w-4 h-4 text-blue-400" />;
+      case ContentType.VIDEO: return <Video className="w-4 h-4 text-primary-teal" />;
       case ContentType.DOCUMENT: return <FileText className="w-4 h-4 text-emerald-400" />;
       case ContentType.TEXT: return <Type className="w-4 h-4 text-purple-400" />;
-      default: return <FileText className="w-4 h-4 text-slate-400" />;
+      default: return <FileText className="w-4 h-4 text-foreground/40" />;
     }
   };
 
@@ -240,7 +240,7 @@ export const CourseDetailsPage: React.FC = () => {
     return (
       <AppLayout>
         <div className="flex items-center justify-center py-20">
-          <Loader className="w-10 h-10 text-blue-500 animate-spin" />
+          <Loader className="w-10 h-10 text-primary-teal animate-spin" />
         </div>
       </AppLayout>
     );
@@ -249,10 +249,10 @@ export const CourseDetailsPage: React.FC = () => {
   if (error || !course) {
     return (
       <AppLayout>
-        <div className="max-w-2xl mx-auto p-6 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-400">
+        <div className="max-w-2xl mx-auto p-6 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-500">
           <h2 className="text-xl font-bold mb-2">Error</h2>
           <p>{error || 'Course not found'}</p>
-          <Link to="/courses" className="text-blue-400 hover:text-blue-300 mt-4 inline-block text-sm font-semibold">
+          <Link to="/courses" className="text-primary-teal hover:opacity-80 mt-4 inline-block text-sm font-semibold">
             ← Back to Courses
           </Link>
         </div>
@@ -262,152 +262,154 @@ export const CourseDetailsPage: React.FC = () => {
 
   return (
     <AppLayout>
-      <div className="flex items-center gap-2 text-sm text-slate-400 mb-6">
-        <Link to="/courses" className="hover:text-white transition flex items-center gap-1">
+      <div className="flex items-center gap-2 text-sm text-foreground/40 mb-6">
+        <Link to="/courses" className="hover:text-primary-teal transition flex items-center gap-1">
           <ChevronLeft className="w-4 h-4" />
           Courses
         </Link>
         <span>/</span>
-        <span className="text-white font-medium truncate">{course.title}</span>
+        <span className="text-foreground font-medium truncate">{course.title}</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-slate-800/60 rounded-2xl overflow-hidden border border-slate-700/50">
-            <div className="h-48 bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-600 relative flex items-center justify-center">
-              <BookOpen className="w-20 h-20 text-white/20" />
+          <div className="bg-surface border border-border rounded-2xl overflow-hidden">
+            <div className="h-48 bg-gradient-to-br from-primary-teal to-deep-teal relative flex items-center justify-center">
+              <BookOpen className="w-20 h-20 text-white/10" />
               {enrolled && (
-                <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/90 text-white text-sm font-bold rounded-full shadow-lg backdrop-blur-sm">
+                <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 text-white text-sm font-bold rounded-full shadow-lg">
                   <CheckCircle className="w-4 h-4" />
                   Enrolled
                 </div>
               )}
             </div>
-            <div className="p-6">
-              <h1 className="text-2xl font-bold text-white mb-3">{course.title}</h1>
-              <p className="text-slate-300 leading-relaxed mb-4">{course.description}</p>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900/50 rounded-full text-slate-300">
-                  <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="p-8">
+              <h1 className="text-3xl font-bold text-foreground mb-4">{course.title}</h1>
+              <p className="text-foreground/60 leading-relaxed mb-6">{course.description}</p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/5 rounded-xl text-foreground/70">
+                  <Calendar className="w-4 h-4 text-primary-teal" />
                   Updated {new Date(course.updatedAt).toLocaleDateString()}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900/50 rounded-full text-slate-300">
-                  <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/5 rounded-xl text-foreground/70">
+                  <BookOpen className="w-4 h-4 text-primary-teal" />
                   {modules.length} {modules.length === 1 ? 'Module' : 'Modules'}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex border-b border-slate-700/50">
+          <div className="flex border-b border-border">
             <button
               onClick={() => setActiveTab('curriculum')}
-              className={`px-6 py-3 text-sm font-semibold transition-all relative ${
-                activeTab === 'curriculum' ? 'text-blue-400' : 'text-slate-400 hover:text-white'
+              className={`px-6 py-4 text-sm font-bold transition-all relative ${
+                activeTab === 'curriculum' ? 'text-primary-teal' : 'text-foreground/40 hover:text-foreground'
               }`}
             >
               Curriculum
               {activeTab === 'curriculum' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary-teal rounded-t-full" />
               )}
             </button>
             <button
               onClick={() => setActiveTab('assignments')}
-              className={`px-6 py-3 text-sm font-semibold transition-all relative ${
-                activeTab === 'assignments' ? 'text-blue-400' : 'text-slate-400 hover:text-white'
+              className={`px-6 py-4 text-sm font-bold transition-all relative ${
+                activeTab === 'assignments' ? 'text-primary-teal' : 'text-foreground/40 hover:text-foreground'
               }`}
             >
               Assignments
               {activeTab === 'assignments' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary-teal rounded-t-full" />
               )}
             </button>
             <button
               onClick={() => setActiveTab('discussions')}
-              className={`px-6 py-3 text-sm font-semibold transition-all relative ${
-                activeTab === 'discussions' ? 'text-blue-400' : 'text-slate-400 hover:text-white'
+              className={`px-6 py-4 text-sm font-bold transition-all relative ${
+                activeTab === 'discussions' ? 'text-primary-teal' : 'text-foreground/40 hover:text-foreground'
               }`}
             >
               Discussions
               {activeTab === 'discussions' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary-teal rounded-t-full" />
               )}
             </button>
           </div>
 
-          <div className="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/50">
+          <div className="bg-surface rounded-2xl p-8 border border-border">
             {activeTab === 'curriculum' && (
               <>
-                <h2 className="text-xl font-bold text-white mb-5 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-blue-400" />
+                <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
+                  <BookOpen className="w-6 h-6 text-primary-teal" />
                   Course Curriculum
                 </h2>
 
                 {modules.length === 0 ? (
-                  <div className="text-center py-12 bg-slate-900/30 rounded-2xl border border-slate-700/50 border-dashed">
-                    <BookOpen className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                    <h3 className="text-white font-bold mb-2">Curriculum Locked</h3>
-                    <p className="text-slate-400 max-w-sm mx-auto mb-6">
+                  <div className="text-center py-16 bg-background rounded-2xl border-2 border-dashed border-border">
+                    <BookOpen className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
+                    <h3 className="text-foreground font-bold mb-2">Curriculum Reserved</h3>
+                    <p className="text-foreground/40 max-w-sm mx-auto mb-8">
                       {enrolled 
-                        ? 'No modules have been added to this course yet.' 
-                        : 'Enroll in this course to gain full access to the curriculum, including all modules and lessons.'}
+                        ? 'The instructor is currently preparing the module content.' 
+                        : 'Enroll to access the full curriculum and all course resources.'}
                     </p>
                     {!enrolled && (
                       <button 
                         onClick={handleEnrollCourse}
-                        className="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold text-sm transition shadow-lg shadow-blue-500/20"
+                        className="btn-primary px-8 py-3 rounded-2xl text-sm font-bold"
                       >
                         Enroll Now
                       </button>
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {modules.map((mod, idx) => {
                       const isExpanded = expandedModules.has(mod.id);
                       return (
-                        <div key={mod.id} className="border border-slate-700/50 rounded-xl overflow-hidden">
+                        <div key={mod.id} className="border border-border rounded-2xl overflow-hidden bg-background">
                           <button
                             onClick={() => toggleModule(mod.id)}
-                            className="w-full flex items-center gap-3 p-4 hover:bg-slate-800/50 transition text-left"
+                            className="w-full flex items-center gap-4 p-5 hover:bg-foreground/5 transition text-left"
                           >
-                            <div className="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
+                            <div className="w-10 h-10 rounded-xl bg-primary-teal/10 text-primary-teal flex items-center justify-center font-bold">
                               {idx + 1}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h3 className="text-white font-semibold truncate">{mod.title}</h3>
+                              <h3 className="text-foreground font-bold truncate">{mod.title}</h3>
                             </div>
                             {isExpanded ? (
-                              <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                              <ChevronDown className="w-5 h-5 text-foreground/30 flex-shrink-0" />
                             ) : (
-                              <ChevronRight className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                              <ChevronRight className="w-5 h-5 text-foreground/30 flex-shrink-0" />
                             )}
                           </button>
 
                           {isExpanded && (
-                            <div className="border-t border-slate-700/50 bg-slate-900/30 p-3 space-y-2">
+                            <div className="border-t border-border bg-surface/50 p-4 space-y-3">
                               {mod.loadingLessons ? (
-                                <div className="flex items-center justify-center py-4">
-                                  <Loader className="w-5 h-5 text-blue-500 animate-spin" />
+                                <div className="flex items-center justify-center py-6">
+                                  <Loader className="w-6 h-6 text-primary-teal animate-spin" />
                                 </div>
                               ) : mod.lessons.length === 0 ? (
-                                <p className="text-slate-500 text-sm text-center py-3">
-                                  Lessons coming soon
+                                <p className="text-foreground/30 text-sm text-center py-4 italic">
+                                  Module content arriving soon
                                 </p>
                               ) : (
                                 mod.lessons.map((lesson, lIdx) => (
                                   <Link
                                     key={lesson.id}
                                     to={enrolled ? `/lessons/${lesson.id}` : '#'}
-                                    className={`flex items-center gap-3 p-3 rounded-lg transition ${
+                                    className={`flex items-center gap-4 p-4 rounded-xl transition ${
                                       enrolled
-                                        ? 'hover:bg-slate-800/50 cursor-pointer'
-                                        : 'cursor-not-allowed opacity-60'
+                                        ? 'hover:bg-primary-teal/10 group cursor-pointer'
+                                        : 'cursor-not-allowed opacity-40'
                                     }`}
                                   >
-                                    {getContentIcon(lesson.contentType)}
-                                    <span className="text-slate-300 text-sm flex-1">{lesson.title}</span>
-                                    <span className="text-slate-500 text-xs">Lesson {lIdx + 1}</span>
+                                    <div className="p-2 bg-foreground/5 rounded-lg group-hover:bg-primary-teal/20 transition-colors">
+                                      {getContentIcon(lesson.contentType)}
+                                    </div>
+                                    <span className="text-foreground/70 font-medium text-sm flex-1 group-hover:text-primary-teal transition-colors">{lesson.title}</span>
+                                    <span className="text-foreground/30 text-xs">Section {lIdx + 1}</span>
                                   </Link>
                                 ))
                               )}
@@ -423,76 +425,76 @@ export const CourseDetailsPage: React.FC = () => {
 
             {activeTab === 'assignments' && (
               <>
-                <h2 className="text-xl font-bold text-white mb-5 flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-blue-400" />
-                  Course Assignments
+                <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
+                  <FileText className="w-6 h-6 text-primary-teal" />
+                  Course Projects
                 </h2>
 
                 {assignments.length === 0 ? (
-                  <div className="text-center py-12 bg-slate-900/30 rounded-2xl border border-slate-700/50 border-dashed">
-                    <FileText className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                    <h3 className="text-white font-bold mb-2">Assignments Locked</h3>
-                    <p className="text-slate-400 max-w-sm mx-auto mb-6">
+                  <div className="text-center py-16 bg-background rounded-2xl border-2 border-dashed border-border">
+                    <FileText className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
+                    <h3 className="text-foreground font-bold mb-2">Projects Reserved</h3>
+                    <p className="text-foreground/40 max-w-sm mx-auto mb-8">
                       {enrolled 
-                        ? 'No assignments have been created for this course yet.' 
-                        : 'Enroll in this course to view and submit projects, assignments, and tasks.'}
+                        ? 'Project briefs will be released by the instructor soon.' 
+                        : 'Enroll to access hands-on projects, assignments, and practical challenges.'}
                     </p>
                     {!enrolled && (
                       <button 
                         onClick={handleEnrollCourse}
-                        className="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold text-sm transition shadow-lg shadow-blue-500/20"
+                        className="btn-primary px-8 py-3 rounded-2xl text-sm font-bold"
                       >
                         Enroll Now
                       </button>
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {assignments.map((as) => {
                       const submission = userSubmissions[as.id];
                       return (
-                        <div key={as.id} className="bg-slate-900/40 border border-slate-700/50 rounded-xl p-5">
-                          <div className="flex items-start justify-between gap-4 mb-4">
+                        <div key={as.id} className="bg-background border border-border rounded-2xl p-6">
+                          <div className="flex items-start justify-between gap-6 mb-6">
                             <div>
-                              <h3 className="text-white font-bold text-lg mb-1">{as.title}</h3>
-                              <p className="text-slate-400 text-sm leading-relaxed">{as.description}</p>
+                              <h3 className="text-foreground font-bold text-xl mb-2">{as.title}</h3>
+                              <p className="text-foreground/50 text-sm leading-relaxed">{as.description}</p>
                             </div>
                             <div className="text-right flex-shrink-0">
-                              <div className="text-blue-400 font-bold">{as.points} Points</div>
-                              <div className="text-slate-500 text-xs mt-1">Due {new Date(as.dueDate).toLocaleDateString()}</div>
+                              <div className="text-primary-teal font-bold text-lg">{as.points} Points</div>
+                              <div className="text-foreground/30 text-xs mt-1 font-medium">Due {new Date(as.dueDate).toLocaleDateString()}</div>
                             </div>
                           </div>
 
                           {!enrolled ? (
-                            <div className="bg-slate-900/50 rounded-lg p-3 text-center text-slate-500 text-xs border border-dashed border-slate-700">
-                              Enroll in the course to submit this assignment
+                            <div className="bg-surface rounded-xl p-4 text-center text-foreground/40 text-xs border border-dashed border-border font-medium">
+                              Enroll in the course to view and submit this assessment
                             </div>
                           ) : submission ? (
-                            <div className="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
-                              <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                                  <FileCheck className="w-5 h-5 text-emerald-400" />
+                            <div className="flex items-center justify-between bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5">
+                              <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                                  <FileCheck className="w-6 h-6 text-emerald-500" />
                                 </div>
                                 <div>
-                                  <div className="text-emerald-400 font-bold text-sm">Submitted Successfully</div>
-                                  <a href={submission.contentUrl} target="_blank" rel="noopener noreferrer" className="text-slate-500 text-xs hover:text-blue-400 transition">View My Submission</a>
+                                  <div className="text-emerald-600 dark:text-emerald-400 font-bold">Successfully Submitted</div>
+                                  <a href={submission.contentUrl} target="_blank" rel="noopener noreferrer" className="text-foreground/40 text-xs hover:text-primary-teal transition font-medium">Review Submission</a>
                                 </div>
                               </div>
                               <div className="text-right">
                                 {submission.status === 'GRADED' ? (
                                   <>
-                                    <div className="text-white font-bold">{submission.grade} / {as.points}</div>
-                                    <div className="text-slate-400 text-xs italic">"{submission.feedback || 'No feedback provided'}"</div>
+                                    <div className="text-foreground font-bold text-lg">{submission.grade} <span className="text-foreground/30 text-sm">/ {as.points}</span></div>
+                                    <div className="text-foreground/40 text-xs italic mt-1">"{submission.feedback || 'Excellent work.'}"</div>
                                   </>
                                 ) : (
-                                  <div className="text-slate-400 text-xs font-medium bg-slate-800 px-3 py-1 rounded-full">Pending Grade</div>
+                                  <div className="text-primary-teal text-xs font-bold bg-primary-teal/10 px-4 py-1.5 rounded-full">Grading in Progress</div>
                                 )}
                               </div>
                             </div>
                           ) : (
                             <div className="flex items-center justify-center">
-                              <label className={`w-full flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-2xl cursor-pointer transition-all ${
-                                isUploading === as.id ? 'border-blue-500/50 bg-blue-500/5' : 'border-slate-700 hover:border-blue-500/50 hover:bg-slate-800/50'
+                              <label className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-[32px] cursor-pointer transition-all ${
+                                isUploading === as.id ? 'border-primary-teal/50 bg-primary-teal/5' : 'border-border hover:border-primary-teal/50 hover:bg-primary-teal/5'
                               }`}>
                                 <input 
                                   type="file" 
@@ -502,14 +504,14 @@ export const CourseDetailsPage: React.FC = () => {
                                 />
                                 {isUploading === as.id ? (
                                   <>
-                                    <Loader className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                                    <span className="text-blue-400 font-medium">Uploading contribution...</span>
+                                    <Loader className="w-10 h-10 text-primary-teal animate-spin mb-3" />
+                                    <span className="text-primary-teal font-bold">Uploading...</span>
                                   </>
                                 ) : (
                                   <>
-                                    <Upload className="w-8 h-8 text-slate-500 mb-2" />
-                                    <span className="text-slate-300 font-bold">Submit Your Work</span>
-                                    <span className="text-slate-500 text-xs mt-1">Upload a PDF, document, or image (Max 10MB)</span>
+                                    <Upload className="w-10 h-10 text-foreground/20 mb-3 group-hover:text-primary-teal transition-colors" />
+                                    <span className="text-foreground font-bold text-lg">Submit Your Project</span>
+                                    <span className="text-foreground/40 text-xs mt-2 font-medium">Drop files or click to upload (PDF, DOCX, ZIP)</span>
                                   </>
                                 )}
                               </label>
@@ -525,81 +527,81 @@ export const CourseDetailsPage: React.FC = () => {
 
             {activeTab === 'discussions' && (
               <>
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                    <MessageSquare className="w-5 h-5 text-blue-400" />
-                    Community Discussions
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-xl font-bold text-foreground flex items-center gap-3">
+                    <MessageSquare className="w-6 h-6 text-primary-teal" />
+                    Community Insights
                   </h2>
                   <button
                     onClick={() => setShowDiscussionForm(!showDiscussionForm)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-semibold transition shadow-lg shadow-blue-500/20"
+                    className="btn-primary flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold"
                   >
                     <Plus className="w-4 h-4" />
-                    New Topic
+                    Start Topic
                   </button>
                 </div>
 
                 {showDiscussionForm && (
-                  <form onSubmit={handleCreateDiscussion} className="bg-slate-900/40 border border-blue-500/30 rounded-xl p-5 mb-8 space-y-4 animate-in slide-in-from-top-4 duration-300">
+                  <form onSubmit={handleCreateDiscussion} className="bg-background border border-primary-teal/30 rounded-2xl p-6 mb-10 space-y-5 animate-in slide-in-from-top-4 duration-300">
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">Topic Title</label>
+                      <label className="block text-sm font-bold text-foreground/70 mb-2">Topic Heading</label>
                       <input
                         type="text"
                         value={newDiscussion.title}
                         onChange={(e) => setNewDiscussion(prev => ({ ...prev, title: e.target.value }))}
-                        placeholder="e.g., How do I get started with Module 2?"
-                        className="w-full px-4 py-2 bg-slate-950/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition text-sm"
+                        placeholder="What's on your mind?"
+                        className="w-full px-5 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-primary-teal transition shadow-sm font-medium"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">Content</label>
+                      <label className="block text-sm font-bold text-foreground/70 mb-2">Message</label>
                       <textarea
                         value={newDiscussion.content}
                         onChange={(e) => setNewDiscussion(prev => ({ ...prev, content: e.target.value }))}
-                        placeholder="Share your thoughts or questions..."
-                        rows={3}
-                        className="w-full px-4 py-2 bg-slate-950/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition text-sm resize-none"
+                        placeholder="Detailed explanation or question..."
+                        rows={4}
+                        className="w-full px-5 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-primary-teal transition shadow-sm resize-none font-medium"
                         required
                       />
                     </div>
-                    <div className="flex justify-end gap-3">
+                    <div className="flex justify-end gap-4 pt-2">
                       <button
                         type="button"
                         onClick={() => setShowDiscussionForm(false)}
-                        className="px-4 py-2 text-slate-400 hover:text-white transition text-xs font-semibold"
+                        className="px-6 py-2 text-foreground/40 hover:text-foreground transition text-xs font-bold"
                       >
-                        Cancel
+                        Discard
                       </button>
                       <button
                         type="submit"
                         disabled={isPostingDiscussion}
-                        className="flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 text-white rounded-lg text-xs font-bold transition shadow-lg shadow-blue-500/10"
+                        className="flex items-center gap-2 px-8 py-2.5 btn-primary disabled:opacity-50 rounded-xl text-xs font-bold"
                       >
-                        {isPostingDiscussion ? <Loader className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
-                        Post Topic
+                        {isPostingDiscussion ? <Loader className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                        Post to Community
                       </button>
                     </div>
                   </form>
                 )}
 
                 {isDiscussionsLoading ? (
-                  <div className="flex items-center justify-center py-10">
-                    <Loader className="w-8 h-8 text-blue-500 animate-spin" />
+                  <div className="flex items-center justify-center py-12">
+                    <Loader className="w-8 h-8 text-primary-teal animate-spin" />
                   </div>
                 ) : discussions.length === 0 ? (
-                  <div className="text-center py-16 bg-slate-900/20 rounded-2xl border border-slate-800 border-dashed">
-                    <MessageSquare className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                    <h3 className="text-white font-bold mb-2">Discussions Restricted</h3>
-                    <p className="text-slate-500 max-w-sm mx-auto mb-6">
+                  <div className="text-center py-20 bg-background rounded-2xl border-2 border-dashed border-border">
+                    <MessageSquare className="w-12 h-12 text-foreground/10 mx-auto mb-4" />
+                    <h3 className="text-foreground font-bold mb-2">Insights Private</h3>
+                    <p className="text-foreground/40 max-w-sm mx-auto mb-8">
                       {enrolled 
-                        ? 'No discussions yet in this course. Be the first to start the conversation!' 
-                        : 'Enroll in the course to participate in the community discussions and ask questions.'}
+                        ? 'Connect with peers. This space is waiting for the first conversation.' 
+                        : 'Join the course to share insights, ask questions, and grow with the community.'}
                     </p>
                     {!enrolled && (
                       <button 
                         onClick={handleEnrollCourse}
-                        className="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold text-sm transition shadow-lg shadow-blue-500/20"
+                        className="btn-primary px-8 py-3 rounded-2xl text-sm font-bold"
                       >
                         Enroll Now
                       </button>
@@ -611,30 +613,30 @@ export const CourseDetailsPage: React.FC = () => {
                       <Link
                         key={disc.id}
                         to={`/discussions?id=${disc.id}`}
-                        className="block group bg-slate-900/40 border border-slate-700/50 rounded-xl p-5 hover:border-blue-500/30 transition-all"
+                        className="block group bg-background border border-border rounded-2xl p-6 hover:border-primary-teal/40 hover:shadow-xl hover:shadow-primary-teal/5 transition-all"
                       >
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start justify-between gap-6">
                           <div className="flex-1">
-                            <h3 className="text-white font-bold group-hover:text-blue-400 transition mb-1">{disc.title}</h3>
-                            <p className="text-slate-400 text-sm line-clamp-2">{disc.content}</p>
+                            <h3 className="text-foreground font-bold text-lg group-hover:text-primary-teal transition mb-2 tracking-tight">{disc.title}</h3>
+                            <p className="text-foreground/50 text-sm line-clamp-2 leading-relaxed">{disc.content}</p>
                           </div>
                           <div className="text-right flex-shrink-0">
-                            <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-blue-500/10 text-blue-400 text-xs font-bold rounded-lg mb-2">
-                              Go to thread
+                            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-teal/10 text-primary-teal text-[10px] font-black uppercase tracking-widest rounded-lg mb-3">
+                              Thread
                               <ChevronRight className="w-3 h-3" />
                             </div>
-                            <div className="text-slate-500 text-[10px] flex items-center justify-end gap-1">
-                              <Calendar className="w-2.5 h-2.5" />
-                              {new Date(disc.createdAt).toLocaleDateString()}
+                            <div className="text-foreground/30 text-[10px] flex items-center justify-end gap-1.5 font-bold">
+                              <Calendar className="w-3 h-3" />
+                              {new Date(disc.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                             </div>
                           </div>
                         </div>
-                        <div className="mt-4 pt-4 border-t border-slate-800/50 flex items-center gap-3">
-                          <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white uppercase">
-                            {disc.user?.firstName?.charAt(0) || <User className="w-3 h-3" />}
+                        <div className="mt-6 pt-6 border-t border-border/50 flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-primary-teal/10 border border-primary-teal/20 flex items-center justify-center text-[10px] font-bold text-primary-teal uppercase">
+                            {disc.user?.firstName?.charAt(0) || <User className="w-4 h-4" />}
                           </div>
-                          <span className="text-slate-400 text-xs">
-                            Started by <span className="text-slate-300">{disc.user ? `${disc.user.firstName} ${disc.user.lastName}` : `User #${disc.createdBy}`}</span>
+                          <span className="text-foreground/40 text-xs font-semibold">
+                            By <span className="text-foreground">{disc.user ? `${disc.user.firstName} ${disc.user.lastName}` : `User #${disc.createdBy}`}</span>
                           </span>
                         </div>
                       </Link>
@@ -647,21 +649,21 @@ export const CourseDetailsPage: React.FC = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/50 sticky top-20">
+          <div className="bg-surface rounded-2xl p-8 border border-border sticky top-24">
             {enrolled ? (
               <>
-                <div className="text-center mb-5">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-emerald-500/15 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-8 h-8 text-emerald-400" />
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-emerald-500/10 rounded-2xl flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 text-emerald-500" />
                   </div>
-                  <h3 className="text-white font-bold text-lg">You're Enrolled!</h3>
-                  <p className="text-slate-400 text-sm mt-1">Continue learning from where you left off</p>
+                  <h3 className="text-foreground font-bold text-xl">Member Access</h3>
+                  <p className="text-foreground/40 text-sm mt-1">Review your progress or continue learning.</p>
                 </div>
                 <Link
                   to="/my-courses"
-                  className="block w-full py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl font-bold text-center shadow-lg shadow-emerald-500/15 transition-all"
+                  className="block w-full py-4 btn-primary rounded-2xl text-white font-bold text-center shadow-xl shadow-primary-teal/20 transition-all"
                 >
-                  Go to My Courses
+                  Go to Classroom
                 </Link>
               </>
             ) : (
@@ -669,51 +671,51 @@ export const CourseDetailsPage: React.FC = () => {
                 <button
                   onClick={handleEnrollCourse}
                   disabled={enrolling || (!!user && Number(course.instructorId) === Number(user.id))}
-                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 disabled:from-slate-600 disabled:to-slate-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-cyan-500/20 transition-all disabled:cursor-not-allowed"
+                  className="w-full py-5 btn-primary disabled:opacity-50 rounded-[24px] font-bold text-lg shadow-2xl shadow-primary-teal/20 transition-all"
                 >
-                  {!user ? 'Login to Enroll' : (Number(course.instructorId) === Number(user.id) ? 'Your Course' : (enrolling ? 'Enrolling...' : 'Enroll Now'))}
+                  {!user ? 'Sign In to Begin' : (Number(course.instructorId) === Number(user.id) ? 'Instructor View' : (enrolling ? 'Setting up access...' : 'Join Course'))}
                 </button>
                 {Number(course.instructorId) === Number(user?.id) && (
-                  <p className="text-center text-slate-500 text-xs mt-3">
-                    You are the instructor for this course
+                  <p className="text-center text-foreground/30 text-xs mt-4 font-medium uppercase tracking-widest">
+                    Course Creator Mode
                   </p>
                 )}
               </>
             )}
 
-            <hr className="border-slate-700/50 my-5" />
+            <hr className="border-border/50 my-6" />
 
             <div>
-              <h4 className="text-white font-semibold mb-3 text-sm">This course includes:</h4>
-              <ul className="space-y-2.5 text-sm">
-                <li className="flex items-center gap-2 text-slate-400">
-                  <BookOpen className="w-4 h-4 text-blue-400" />
-                  {modules.length} {modules.length === 1 ? 'Module' : 'Modules'}
+              <h4 className="text-foreground font-bold mb-4 text-xs uppercase tracking-widest opacity-40">At a glance:</h4>
+              <ul className="space-y-3.5 text-sm">
+                <li className="flex items-center gap-3 text-foreground/60">
+                  <BookOpen className="w-4 h-4 text-primary-teal" />
+                  {modules.length} Detailed Modules
                 </li>
-                <li className="flex items-center gap-2 text-slate-400">
-                  <FileText className="w-4 h-4 text-purple-400" />
-                  {assignments.length} Projects & Tasks
+                <li className="flex items-center gap-3 text-foreground/60">
+                  <FileText className="w-4 h-4 text-primary-teal" />
+                  {assignments.length} Project Assignments
                 </li>
-                <li className="flex items-center gap-2 text-slate-400">
-                  <Calendar className="w-4 h-4 text-emerald-400" />
-                  Full lifetime access
+                <li className="flex items-center gap-3 text-foreground/60">
+                  <Calendar className="w-4 h-4 text-primary-teal" />
+                  Lifetime Community Access
                 </li>
               </ul>
             </div>
           </div>
 
           {course.instructor && (
-            <div className="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/50">
-              <h4 className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-4">Your Instructor</h4>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg font-bold text-white shadow-lg">
+            <div className="bg-surface rounded-2xl p-8 border border-border">
+              <h4 className="text-foreground/30 text-xs font-black uppercase tracking-widest mb-6">Facilitator</h4>
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-teal to-deep-teal flex items-center justify-center text-lg font-bold text-white shadow-lg">
                   {course.instructor.firstName?.charAt(0)}{course.instructor.lastName?.charAt(0)}
                 </div>
                 <div>
-                  <h5 className="text-white font-bold">
+                  <h5 className="text-foreground font-bold text-lg">
                     {course.instructor.firstName} {course.instructor.lastName}
                   </h5>
-                  <p className="text-slate-400 text-sm">Course Instructor</p>
+                  <p className="text-foreground/40 text-sm font-medium">Verified Expert</p>
                 </div>
               </div>
             </div>

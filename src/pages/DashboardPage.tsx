@@ -36,10 +36,10 @@ export const DashboardPage: React.FC = () => {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4" />
-          <p>Loading your dashboard...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-foreground text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-teal mx-auto mb-4" />
+          <p className="text-foreground/60 font-medium">Preparing your space...</p>
         </div>
       </div>
     );
@@ -48,44 +48,44 @@ export const DashboardPage: React.FC = () => {
   const renderStudentDashboard = (data: StudentDashboard) => (
     <>
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/30 transition-all group">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <BookOpen className="w-6 h-6 text-blue-400" />
+            <div className="w-12 h-12 rounded-xl bg-primary-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <BookOpen className="w-6 h-6 text-primary-teal" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.totalEnrolled}</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.totalEnrolled}</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Enrolled Courses</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Enrolled Courses</p>
         </div>
 
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-emerald-500/30 transition-all group">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-light-green/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Trophy className="w-6 h-6 text-emerald-400" />
+            <div className="w-12 h-12 rounded-xl bg-light-green/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Trophy className="w-6 h-6 text-light-green" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.completedCourses}</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.completedCourses}</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Completed</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Completed</p>
         </div>
 
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all group">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <TrendingUp className="w-6 h-6 text-purple-400" />
+            <div className="w-12 h-12 rounded-xl bg-primary-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <TrendingUp className="w-6 h-6 text-primary-teal" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.averageProgress}%</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.averageProgress}%</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Avg. Progress</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Avg. Progress</p>
         </div>
       </div>
 
       {/* Recent Learning */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-5">
-          <h3 className="text-xl font-bold text-white">Continue Learning</h3>
-          <Link to="/my-courses" className="text-blue-400 hover:text-blue-300 text-sm font-semibold transition">
-            View All →
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-2xl font-display font-bold text-foreground">Continue Your Journey</h3>
+          <Link to="/my-courses" className="text-primary-teal hover:opacity-80 text-sm font-bold transition">
+            Classroom Overview →
           </Link>
         </div>
 
@@ -95,66 +95,72 @@ export const DashboardPage: React.FC = () => {
               <Link
                 key={course.id}
                 to={`/courses/${course.courseId}`}
-                className="bg-slate-800/50 rounded-2xl p-5 border border-slate-700/50 hover:border-blue-500/30 transition-all group"
+                className="bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 hover:shadow-xl hover:shadow-primary-teal/5 transition-all group"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                    <PlayCircle className="w-7 h-7 text-white/80" />
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 bg-gradient-to-br from-primary-teal to-deep-teal rounded-xl flex items-center justify-center flex-shrink-0 group-hover:rotate-3 transition-transform">
+                    <PlayCircle className="w-8 h-8 text-white/90" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h4 className="text-white font-bold truncate group-hover:text-blue-400 transition-colors">{course.title}</h4>
-                    <p className="text-slate-500 text-xs mt-0.5">
-                      Enrolled {new Date(course.enrolledAt).toLocaleDateString()}
+                    <h4 className="text-foreground font-bold truncate group-hover:text-primary-teal transition-colors tracking-tight text-lg">{course.title}</h4>
+                    <p className="text-foreground/40 text-xs mt-1 font-medium">
+                      Began {new Date(course.enrolledAt).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="flex items-center gap-4">
+                  <div className="flex-1 h-2.5 bg-background rounded-full overflow-hidden">
                     <div
-                      className={`h-full rounded-full transition-all duration-700 ${
-                        course.progress >= 100 ? 'bg-emerald-500' : 'bg-blue-500'
+                      className={`h-full rounded-full transition-all duration-1000 ${
+                        course.progress >= 100 ? 'bg-light-green' : 'bg-primary-teal'
                       }`}
                       style={{ width: `${Math.min(course.progress, 100)}%` }}
                     />
                   </div>
-                  <span className="text-white font-bold text-sm w-12 text-right">{course.progress}%</span>
+                  <span className="text-foreground font-black text-sm w-12 text-right">{course.progress}%</span>
                 </div>
               </Link>
             ))}
           </div>
         ) : (
-          <div className="bg-slate-800/30 rounded-2xl p-10 border border-slate-700/50 border-dashed text-center">
-            <GraduationCap className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-400 mb-4">No active courses yet. Start your journey today!</p>
-            <Link to="/courses" className="inline-flex px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition shadow-lg shadow-blue-500/25">
-              Browse Courses
+          <div className="bg-surface rounded-2xl p-16 border-2 border-border border-dashed text-center">
+            <GraduationCap className="w-16 h-16 text-foreground/10 mx-auto mb-6" />
+            <p className="text-foreground/40 font-medium mb-8 max-w-sm mx-auto text-lg leading-relaxed">Your learning path is clear. Ready to embark on your first course?</p>
+            <Link to="/courses" className="btn-primary px-10 py-3.5 rounded-2xl text-lg font-bold">
+              Find Your Focus
             </Link>
           </div>
         )}
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <Link to="/courses" className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/30 transition-all group">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <BookOpen className="w-6 h-6 text-white" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link to="/courses" className="bg-surface rounded-[32px] p-8 border border-border hover:border-primary-teal/30 hover:shadow-xl hover:shadow-primary-teal/5 transition-all group overflow-hidden relative">
+          <div className="flex items-center gap-6 relative z-10">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary-teal to-deep-teal rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary-teal/20">
+              <BookOpen className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg">Explore Courses</h4>
-              <p className="text-slate-400 text-sm">Browse and enroll in new courses</p>
+              <h4 className="text-foreground font-display font-bold text-2xl tracking-tight">Explore Knowledge</h4>
+              <p className="text-foreground/40 font-medium mt-1">Discover industry-vetted courses</p>
             </div>
           </div>
+          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+             <BookOpen className="w-24 h-24 -rotate-12 translate-x-8 -translate-y-4" />
+          </div>
         </Link>
-        <Link to="/discussions" className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all group">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6 text-white" />
+        <Link to="/discussions" className="bg-surface rounded-[32px] p-8 border border-border hover:border-light-green/30 hover:shadow-xl hover:shadow-light-green/5 transition-all group overflow-hidden relative">
+          <div className="flex items-center gap-6 relative z-10">
+            <div className="w-16 h-16 bg-gradient-to-br from-light-green to-mid-green rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-light-green/20">
+              <Zap className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg">Discussions</h4>
-              <p className="text-slate-400 text-sm">Join the learning community</p>
+              <h4 className="text-foreground font-display font-bold text-2xl tracking-tight">Community Insights</h4>
+              <p className="text-foreground/40 font-medium mt-1">Grow alongside your peers</p>
             </div>
+          </div>
+          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+             <Zap className="w-24 h-24 -rotate-12 translate-x-8 -translate-y-4" />
           </div>
         </Link>
       </div>
@@ -163,69 +169,75 @@ export const DashboardPage: React.FC = () => {
 
   const renderInstructorDashboard = (data: InstructorDashboard) => (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/30 transition-all group">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <BookOpen className="w-6 h-6 text-blue-400" />
+            <div className="w-12 h-12 rounded-xl bg-primary-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <BookOpen className="w-6 h-6 text-primary-teal" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.activeCourses}</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.activeCourses}</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Active Courses</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Active Portfolio</p>
         </div>
 
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-emerald-500/30 transition-all group">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-light-green/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Users className="w-6 h-6 text-emerald-400" />
+            <div className="w-12 h-12 rounded-xl bg-light-green/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Users className="w-6 h-6 text-light-green" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.totalEnrollments}</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.totalEnrollments}</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Total Enrollments</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Total Reach</p>
         </div>
 
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all group">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <GraduationCap className="w-6 h-6 text-purple-400" />
+            <div className="w-12 h-12 rounded-xl bg-primary-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <GraduationCap className="w-6 h-6 text-primary-teal" />
             </div>
-            <span className="text-3xl font-bold text-white">{data.stats.uniqueStudents}</span>
+            <span className="text-3xl font-display font-bold text-foreground">{data.stats.uniqueStudents}</span>
           </div>
-          <p className="text-slate-400 text-sm font-medium">Unique Students</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Learners</p>
         </div>
 
-        <div className="bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-amber-500/30 transition-all group">
+        <div className="bg-surface rounded-2xl p-6 border border-border hover:border-light-green/30 transition-all group">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Star className="w-6 h-6 text-amber-400" />
+            <div className="w-12 h-12 rounded-xl bg-light-green/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Star className="w-6 h-6 text-light-green" />
             </div>
           </div>
-          <p className="text-white font-bold truncate">{data.stats.mostPopularCourse}</p>
-          <p className="text-slate-400 text-sm font-medium">Most Popular Course</p>
+          <p className="text-foreground font-bold truncate tracking-tight mb-1">{data.stats.mostPopularCourse}</p>
+          <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">Top Performing</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <Link to="/instructor" className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/30 transition-all group">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <BarChart3 className="w-6 h-6 text-white" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link to="/instructor" className="bg-surface rounded-[32px] p-8 border border-border hover:border-primary-teal/30 hover:shadow-xl hover:shadow-primary-teal/5 transition-all group overflow-hidden relative">
+          <div className="flex items-center gap-6 relative z-10">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary-teal to-deep-teal rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary-teal/20">
+              <BarChart3 className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg">Manage Courses</h4>
-              <p className="text-slate-400 text-sm">Create, edit, and manage your courses</p>
+              <h4 className="text-foreground font-display font-bold text-2xl tracking-tight">Curriculum Suite</h4>
+              <p className="text-foreground/40 font-medium mt-1">Design and publish your next course</p>
             </div>
           </div>
+          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+             <BarChart3 className="w-24 h-24 -rotate-12 translate-x-8 -translate-y-4" />
+          </div>
         </Link>
-        <Link to="/discussions" className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all group">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6 text-white" />
+        <Link to="/discussions" className="bg-surface rounded-[32px] p-8 border border-border hover:border-light-green/30 hover:shadow-xl hover:shadow-light-green/5 transition-all group overflow-hidden relative">
+          <div className="flex items-center gap-6 relative z-10">
+            <div className="w-16 h-16 bg-gradient-to-br from-light-green to-mid-green rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-light-green/20">
+              <Zap className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg">Discussions</h4>
-              <p className="text-slate-400 text-sm">Engage with your students</p>
+              <h4 className="text-foreground font-display font-bold text-2xl tracking-tight">Active Inquiries</h4>
+              <p className="text-foreground/40 font-medium mt-1">Mentor and guide your learners</p>
             </div>
+          </div>
+          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+             <Zap className="w-24 h-24 -rotate-12 translate-x-8 -translate-y-4" />
           </div>
         </Link>
       </div>
@@ -233,24 +245,24 @@ export const DashboardPage: React.FC = () => {
   );
 
   const renderAdminDashboard = (data: AdminDashboard) => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-10">
       {[
-        { label: 'Total Users', value: data.overview.totalUsers, icon: Users, color: 'blue' },
-        { label: 'Students', value: data.overview.studentsCount, icon: GraduationCap, color: 'emerald' },
-        { label: 'Instructors', value: data.overview.instructorsCount, icon: Star, color: 'purple' },
-        { label: 'Total Courses', value: data.overview.totalCourses, icon: BookOpen, color: 'amber' },
-        { label: 'Enrollments', value: data.overview.totalEnrollments, icon: TrendingUp, color: 'pink' },
+        { label: 'Network Users', value: data.overview.totalUsers, icon: Users, color: 'primary-teal' },
+        { label: 'Active Students', value: data.overview.studentsCount, icon: GraduationCap, color: 'light-green' },
+        { label: 'Verified Mentors', value: data.overview.instructorsCount, icon: Star, color: 'primary-teal' },
+        { label: 'Catalog Size', value: data.overview.totalCourses, icon: BookOpen, color: 'light-green' },
+        { label: 'Registrations', value: data.overview.totalEnrollments, icon: TrendingUp, color: 'primary-teal' },
       ].map((stat) => {
         const Icon = stat.icon;
         return (
-          <div key={stat.label} className={`bg-slate-800/60 backdrop-blur rounded-2xl p-6 border border-slate-700/50 hover:border-${stat.color}-500/30 transition-all group`}>
+          <div key={stat.label} className={`bg-surface rounded-2xl p-6 border border-border hover:border-primary-teal/30 transition-all group`}>
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-xl bg-${stat.color}-500/15 flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                <Icon className={`w-6 h-6 text-${stat.color}-400`} />
+              <div className={`w-12 h-12 rounded-xl bg-primary-teal/10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                <Icon className={`w-6 h-6 text-primary-teal`} />
               </div>
-              <span className="text-3xl font-bold text-white">{stat.value}</span>
+              <span className="text-3xl font-display font-bold text-foreground">{stat.value}</span>
             </div>
-            <p className="text-slate-400 text-sm font-medium">{stat.label}</p>
+            <p className="text-foreground/40 text-sm font-semibold uppercase tracking-wider">{stat.label}</p>
           </div>
         );
       })}
@@ -260,17 +272,19 @@ export const DashboardPage: React.FC = () => {
   return (
     <AppLayout>
       {/* Welcome Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-1">
-          Welcome back, {user?.firstName}! 👋
-        </h1>
-        <p className="text-slate-400">
-          {user?.role === 'STUDENT'
-            ? 'Here\'s your learning overview'
-            : user?.role === 'INSTRUCTOR'
-            ? 'Here\'s how your courses are performing'
-            : 'Platform overview'}
-        </p>
+      <div className="mb-10 lg:flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-display font-bold text-foreground mb-2">
+            Welcome, {user?.firstName}
+          </h1>
+          <p className="text-foreground/40 font-medium text-lg leading-relaxed">
+            {user?.role === 'STUDENT'
+              ? 'Ready to continue your learning growth?'
+              : user?.role === 'INSTRUCTOR'
+              ? 'Your courses are thriving today.'
+              : 'The platform is performing optimally.'}
+          </p>
+        </div>
       </div>
 
       {/* Error State */}
@@ -283,7 +297,7 @@ export const DashboardPage: React.FC = () => {
       {/* Loading State */}
       {loadingDash ? (
         <div className="flex items-center justify-center py-20">
-          <Loader className="w-10 h-10 text-blue-500 animate-spin" />
+          <Loader className="w-10 h-10 text-primary-teal animate-spin" />
         </div>
       ) : dashData ? (
         <>
