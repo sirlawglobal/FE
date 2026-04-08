@@ -1,4 +1,4 @@
-import { BookOpen, Users, Clock, Star, Play } from 'lucide-react';
+import { BookOpen, Users, Clock, Play } from 'lucide-react';
 import { Card } from './index';
 import { Badge } from './index';
 
@@ -27,80 +27,78 @@ export function CourseCard({
   students,
   lessons,
   duration,
-  rating,
   price,
   isEnrolled,
   onClick,
 }: CourseCardProps) {
   return (
-    <Card hover onClick={onClick} className="overflow-hidden group">
+    <Card hover onClick={onClick} className="overflow-hidden group bg-surface border-border">
       {/* Header with thumbnail */}
-      <div className="relative h-48 bg-gradient-to-br from-primary-500/20 to-blue-500/20 flex items-center justify-center overflow-hidden">
+      <div className="relative h-48 bg-gradient-to-br from-primary-teal/10 to-deep-teal/20 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-10 mix-blend-overlay"></div>
         <div className="relative flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-dark-800/80 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
-            <Play size={24} className="text-primary-400 ml-1" fill="currentColor" />
+          <div className="w-16 h-16 rounded-full bg-background/80 flex items-center justify-center group-hover:bg-primary-teal transition-colors duration-300">
+            <Play size={24} className="text-primary-teal group-hover:text-white ml-1 transition-colors" fill="currentColor" />
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-5">
         {/* Badges */}
         <div className="flex gap-2 flex-wrap">
-          <Badge variant="primary">{level}</Badge>
-          {isEnrolled && <Badge variant="success">Enrolled</Badge>}
+          <Badge variant="primary" className="bg-primary-teal/10 text-primary-teal border-primary-teal/20">
+            {level}
+          </Badge>
+          {isEnrolled && (
+            <Badge variant="success" className="bg-light-green/10 text-light-green border-light-green/20">
+              Enrolled
+            </Badge>
+          )}
         </div>
 
         {/* Title and description */}
-        <div>
-          <h3 className="text-xl font-bold mb-2 line-clamp-2">{title}</h3>
-          <p className="text-gray-400 text-sm line-clamp-2">{description}</p>
+        <div className="space-y-2">
+          <h3 className="text-xl font-bold text-foreground line-clamp-2 leading-tight group-hover:text-primary-teal transition-colors">
+            {title}
+          </h3>
+          <p className="text-foreground/50 text-sm line-clamp-2 leading-relaxed">
+            {description}
+          </p>
         </div>
 
         {/* Instructor */}
-        <div className="text-sm text-gray-400 py-3 border-y border-dark-700/50">
-          by <span className="text-gray-200 font-semibold">{instructor}</span>
+        <div className="text-sm text-foreground/40 py-3 border-y border-border/50">
+          by <span className="text-foreground font-semibold">{instructor}</span>
         </div>
 
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-3 text-sm">
-          <div className="flex items-center gap-2 text-gray-400">
-            <Users size={16} />
+          <div className="flex items-center gap-2 text-foreground/50">
+            <Users size={16} className="text-primary-teal/60" />
             <span>{students}</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-400">
-            <BookOpen size={16} />
+          <div className="flex items-center gap-2 text-foreground/50">
+            <BookOpen size={16} className="text-primary-teal/60" />
             <span>{lessons}</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-400">
-            <Clock size={16} />
+          <div className="flex items-center gap-2 text-foreground/50">
+            <Clock size={16} className="text-primary-teal/60" />
             <span>{duration}h</span>
           </div>
         </div>
 
-        {/* Rating */}
-        <div className="flex items-center gap-2 py-3 border-top border-dark-700/50">
-          <div className="flex gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                size={16}
-                className={i < Math.floor(rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-600'}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-gray-400">({rating})</span>
-        </div>
-
         {/* Price and CTA */}
-        <div className="flex items-center justify-between pt-3 border-t border-dark-700/50">
-          <div className="font-semibold">
-            ${price}
-            {price === 0 && <span className="text-sm text-gray-400 ml-1">Free</span>}
+        <div className="flex items-center justify-between pt-4 border-t border-border/50">
+          <div className="font-bold text-lg text-foreground">
+            {price === 0 ? (
+              <span className="text-light-green">Free</span>
+            ) : (
+              `$${price}`
+            )}
           </div>
-          <button className="btn btn-primary btn-sm">
-            {isEnrolled ? 'Continue' : 'Enroll'}
+          <button className="btn-primary px-5 py-2 rounded-xl text-sm font-bold">
+            {isEnrolled ? 'Continue' : 'Enroll Now'}
           </button>
         </div>
       </div>

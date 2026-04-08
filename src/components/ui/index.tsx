@@ -70,11 +70,12 @@ export function Button({
 
 interface BadgeProps {
   variant?: 'primary' | 'success' | 'warning' | 'error';
-  children: ReactNode;
+  children: React.ReactNode;
   icon?: LucideIcon;
+  className?: string;
 }
 
-export function Badge({ variant = 'primary', children, icon: Icon }: BadgeProps) {
+export function Badge({ variant = 'primary', children, icon: Icon, className = '' }: BadgeProps) {
   const variantClass = {
     primary: 'badge-primary',
     success: 'badge-success',
@@ -83,7 +84,7 @@ export function Badge({ variant = 'primary', children, icon: Icon }: BadgeProps)
   }[variant];
 
   return (
-    <span className={`badge ${variantClass}`}>
+    <span className={`badge ${variantClass} ${className}`}>
       {Icon && <Icon size={14} />}
       {children}
     </span>
@@ -103,14 +104,14 @@ export function FormField({ label, error, hint, className = '', children, requir
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label className="block text-sm font-semibold text-gray-200">
+        <label className="block text-sm font-semibold text-foreground/70">
           {label}
-          {required && <span className="text-red-400"> *</span>}
+          {required && <span className="text-red-500"> *</span>}
         </label>
       )}
       {children}
-      {error && <p className="text-sm text-red-400">{error}</p>}
-      {hint && <p className="text-sm text-gray-500">{hint}</p>}
+      {error && <p className="text-sm text-red-500">{error}</p>}
+      {hint && <p className="text-sm text-foreground/40">{hint}</p>}
     </div>
   );
 }
@@ -139,8 +140,8 @@ export function Section({ title, description, children, className = '', actions 
         {(title || description || actions) && (
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between">
             <div>
-              {title && <h2 className="text-4xl font-display font-bold mb-2">{title}</h2>}
-              {description && <p className="text-gray-400 text-lg">{description}</p>}
+              {title && <h2 className="text-4xl font-display font-bold mb-2 text-foreground">{title}</h2>}
+              {description && <p className="text-foreground/50 text-lg">{description}</p>}
             </div>
             {actions && <div className="mt-6 md:mt-0">{actions}</div>}
           </div>
@@ -158,7 +159,7 @@ export function Divider() {
 export function Spinner() {
   return (
     <div className="flex items-center justify-center">
-      <div className="w-8 h-8 border-4 border-dark-700 border-t-primary-500 rounded-full animate-spin"></div>
+      <div className="w-8 h-8 border-4 border-border border-t-primary-teal rounded-full animate-spin"></div>
     </div>
   );
 }
