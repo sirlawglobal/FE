@@ -10,95 +10,60 @@ export const LandingPage: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      {/* Navigation */}
-      <nav className="bg-surface/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-500 selection:bg-primary-teal/20 selection:text-primary-teal">
+      {/* Dynamic Navigation */}
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border/40 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-primary-teal">
+            <div className="text-2xl font-display font-bold text-primary-teal tracking-tight">
               TalentFlow
             </div>
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-foreground/70 hover:text-primary-teal transition">
+            <div className="hidden md:flex items-center gap-10">
+              <a href="#features" className="text-sm font-medium text-foreground/60 hover:text-primary-teal transition-colors">
                 Features
               </a>
-              <Link
-                to="/teams"
-                className="text-foreground/70 hover:text-primary-teal transition"
-              >
+              <Link to="/teams" className="text-sm font-medium text-foreground/60 hover:text-primary-teal transition-colors">
                 Teams
               </Link>
-              <Link
-                to="/courses"
-                className="text-foreground/70 hover:text-primary-teal transition"
-              >
+              <Link to="/courses" className="text-sm font-medium text-foreground/60 hover:text-primary-teal transition-colors">
                 Courses
               </Link>
-              <Link
-                to="/auth/login"
-                className="px-4 py-2 text-foreground/70 hover:text-primary-teal transition"
-              >
+              <div className="h-4 w-px bg-border mx-2"></div>
+              <Link to="/auth/login" className="text-sm font-medium text-foreground/60 hover:text-primary-teal transition-colors">
                 Sign In
               </Link>
-              <Link
-                to="/auth/register"
-                className="btn-primary px-6 py-2 rounded-lg"
-              >
+              <Link to="/auth/register" className="btn-primary px-5 py-2 rounded-xl text-sm">
                 Get Started
               </Link>
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-foreground/10 text-foreground/70 hover:text-foreground transition-colors border border-border"
+                className="p-2.5 rounded-xl hover:bg-foreground/5 text-foreground/40 hover:text-primary-teal transition-all border border-transparent hover:border-border"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
             </div>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-foreground"
-            >
-              {isOpen ? <X /> : <Menu />}
-            </button>
-            <button
-              onClick={toggleTheme}
-              className="md:hidden p-2 rounded-full hover:bg-foreground/10 text-foreground/70 transition-colors border border-border ml-2"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+            
+            <div className="flex items-center gap-2 md:hidden">
+              <button onClick={toggleTheme} className="p-2 text-foreground/60">
+                {theme === 'dark' ? <Sun size={20}/> : <Moon size={20}/>}
+              </button>
+              <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-foreground">
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden mt-4 space-y-2 pb-4">
-              <a href="#features" className="block px-4 py-2 text-foreground/70 hover:text-primary-teal transition">
-                Features
-              </a>
-              <Link
-                to="/teams"
-                className="block px-4 py-2 text-foreground/70 hover:text-primary-teal transition"
-              >
-                Teams
-              </Link>
-              <Link
-                to="/courses"
-                className="block px-4 py-2 text-foreground/70 hover:text-primary-teal transition"
-              >
-                Courses
-              </Link>
-              <Link
-                to="/auth/login"
-                className="block px-4 py-2 text-foreground/70 hover:text-primary-teal transition"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/auth/register"
-                className="block px-6 py-2 btn-primary rounded-lg text-center"
-              >
-                Get Started
-              </Link>
+            <div className="md:hidden pt-6 pb-4 space-y-4 animate-in slide-in-from-top-4 duration-300">
+              <a href="#features" className="block text-lg font-medium text-foreground/70">Features</a>
+              <Link to="/teams" className="block text-lg font-medium text-foreground/70">Teams</Link>
+              <Link to="/courses" className="block text-lg font-medium text-foreground/70">Courses</Link>
+              <div className="pt-4 flex flex-col gap-4">
+                <Link to="/auth/login" className="text-center py-3 border border-border rounded-xl font-medium">Sign In</Link>
+                <Link to="/auth/register" className="text-center py-3 btn-primary rounded-xl font-medium">Get Started</Link>
+              </div>
             </div>
           )}
         </div>
@@ -107,37 +72,37 @@ export const LandingPage: React.FC = () => {
       {/* Hero Section */}
       <Hero />
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+      {/* Features Section - Simple & Grounded */}
+      <section id="features" className="section-py px-6 lg:px-8 bg-surface/20">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            viewport={{ once: true }}
+            className="max-w-2xl mb-24"
           >
-            <h2 className="text-4xl font-bold mb-4 text-foreground transition-colors">Why Choose TalentFlow?</h2>
-            <p className="text-foreground/60 text-lg">
-              Discover the features that make learning and teaching exceptional
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground tracking-tight">Built for Real Progress</h2>
+            <p className="text-xl text-foreground/60 leading-relaxed">
+              We focus on what truly matters: an authentic interface, verified experts, and a community that actually supports your growth.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {[
               {
                 icon: BookOpen,
-                title: 'Comprehensive Courses',
-                description: 'Access a wide range of courses taught by industry experts',
+                title: 'Authentic Content',
+                description: 'No filler. Just high-quality, practical knowledge curated by industry veterans.',
               },
               {
                 icon: Users,
-                title: 'Community Learning',
-                description: 'Connect with learners and instructors from around the world',
+                title: 'Human Connection',
+                description: 'Learn alongside others in a space that feels personal, not institutional.',
               },
               {
                 icon: Zap,
-                title: 'Fast Progress',
-                description: 'Track your learning journey and achieve your goals quickly',
+                title: 'Natural Flow',
+                description: 'An interface that disappears so you can focus entirely on your learning journey.',
               },
             ].map((feature, index) => {
               const Icon = feature.icon;
@@ -146,14 +111,17 @@ export const LandingPage: React.FC = () => {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="card p-8 border border-border hover:border-primary-teal/50 transition-colors"
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="space-y-6 group"
                 >
-                  <div className="w-12 h-12 bg-primary-teal/10 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-primary-teal" />
+                  <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center transition-all group-hover:border-primary-teal/50 group-hover:shadow-lg group-hover:shadow-primary-teal/5">
+                    <Icon className="w-7 h-7 text-primary-teal" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-foreground">{feature.title}</h3>
-                  <p className="text-foreground/60">{feature.description}</p>
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
+                    <p className="text-foreground/50 leading-relaxed">{feature.description}</p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -161,47 +129,60 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* CTA Section - Minimalist & Confident */}
+      <section className="section-py px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="card-gradient p-12 rounded-2xl shadow-glow-md"
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="bg-primary-teal p-12 md:p-20 rounded-[32px] text-center space-y-10 relative overflow-hidden shadow-2xl shadow-primary-teal/20"
           >
-            <h2 className="text-4xl font-bold mb-4 text-white">Ready to Start Learning?</h2>
-            <p className="text-white/80 text-lg mb-8">
-              Join thousands of students and instructors on TalentFlow today
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="relative z-10 space-y-4">
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">Begin Your Journey</h2>
+              <p className="text-white/80 text-lg md:text-xl max-w-xl mx-auto">
+                Join a global community of 12,000+ students and start learning what matters today.
+              </p>
+            </div>
+            
+            <div className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/auth/register"
-                className="px-8 py-3 bg-white text-primary-teal hover:bg-gray-100 rounded-lg font-semibold transition shadow-lg"
+                className="px-10 py-4 bg-white text-primary-teal hover:bg-white/90 rounded-2xl font-bold text-lg transition-transform hover:scale-105"
               >
-                Create Free Account
+                Create Account
               </Link>
               <Link
                 to="/auth/login"
-                className="px-8 py-3 border border-white/30 text-white hover:bg-white/10 rounded-lg font-semibold transition"
+                className="px-10 py-4 bg-white/10 text-white backdrop-blur-sm border border-white/20 hover:bg-white/20 rounded-2xl font-bold text-lg transition-all"
               >
                 Sign In
               </Link>
             </div>
+
+            {/* Subtle background decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 blur-3xl rounded-full -translate-x-1/2 translate-y-1/2"></div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-4 sm:px-6 lg:px-8 bg-surface/50">
-        <div className="max-w-7xl mx-auto text-center text-foreground/50">
-          <div className="text-2xl font-bold text-primary-teal mb-4">
+      {/* Footer - Minimal */}
+      <footer className="border-t border-border/40 py-20 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-foreground/40 text-sm">
+          <div className="text-2xl font-display font-bold text-primary-teal">
             TalentFlow
           </div>
-          <p>&copy; {new Date().getFullYear()} TalentFlow. All rights reserved.</p>
+          <div className="flex gap-10">
+            <a href="#" className="hover:text-primary-teal transition-colors">Twitter</a>
+            <a href="#" className="hover:text-primary-teal transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-primary-teal transition-colors">Privacy</a>
+          </div>
+          <p>&copy; {new Date().getFullYear()} TalentFlow. Pure & Simple Learning.</p>
         </div>
       </footer>
     </div>
+
   );
 };
 

@@ -70,15 +70,15 @@
   .card {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    @apply rounded-xl backdrop-blur-md transition-all duration-300;
+    @apply rounded-2xl backdrop-blur-sm transition-all duration-300;
   }
 
   .card-hover {
-    @apply card hover:-translate-y-1 hover:shadow-glow-md;
+    @apply card hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-teal/5;
   }
   
   .card-gradient {
-    background: linear-gradient(135deg, var(--deep-teal), var(--primary-teal), var(--light-green));
+    background: linear-gradient(135deg, var(--primary-teal), var(--deep-teal));
     @apply text-white border-0;
   }
 
@@ -88,7 +88,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-gradient-to-r from-primary-teal to-deep-teal text-white hover:from-deep-teal hover:to-primary-teal shadow-glow-sm hover:shadow-glow-md;
+    @apply btn bg-gradient-to-r from-primary-teal to-deep-teal text-white hover:opacity-90 shadow-lg shadow-primary-teal/20;
   }
 
   .btn-secondary {
