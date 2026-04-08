@@ -8,20 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "var(--primary-teal)",
-          teal: "var(--primary-teal)",
-          deep: "var(--deep-teal)",
-        },
-        accent: {
-          mint: "var(--mint-green)",
-          muted: "var(--muted-teal)",
-          light: "var(--light-green)",
-          mid: "var(--mid-green)",
-        },
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        surface: "var(--surface)",
+        "primary-teal": "rgb(var(--primary-teal-rgb) / <alpha-value>)",
+        "deep-teal": "rgb(var(--deep-teal-rgb) / <alpha-value>)",
+        "light-green": "rgb(var(--light-green-rgb) / <alpha-value>)",
+        "mid-green": "rgb(var(--mid-green-rgb) / <alpha-value>)",
+        "mint-green": "rgb(var(--mint-green-rgb) / <alpha-value>)",
+        "muted-teal": "rgb(var(--muted-teal-rgb) / <alpha-value>)",
+        background: "rgb(var(--background-rgb) / <alpha-value>)",
+        foreground: "rgb(var(--foreground-rgb) / <alpha-value>)",
+        surface: "rgb(var(--surface-rgb) / <alpha-value>)",
+        border: "rgb(var(--border-rgb) / <alpha-value>)",
         dark: {
           50: "#f9fafb",
           100: "#f3f4f6",

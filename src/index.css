@@ -5,31 +5,42 @@
 /* Root variables for consistency */
 @layer base {
   :root {
-    /* Primary Colors */
-    --primary-teal: #0F8F7A;
-    --deep-teal: #0A5C4F;
+    /* Primary Colors (RGB components for Tailwind opacity support) */
+    --primary-teal-rgb: 15 143 122;  /* #0F8F7A */
+    --deep-teal-rgb: 10 92 79;      /* #0A5C4F */
     
     /* Accent Colors */
-    --light-green: #5CCB6F;
-    --mid-green: #3BAE5A;
-    --mint-green: #8FE3A3;
-    --muted-teal: #2E7D73;
+    --light-green-rgb: 92 203 111;  /* #5CCB6F */
+    --mid-green-rgb: 59 174 90;     /* #3BAE5A */
+    --mint-green-rgb: 143 227 163;  /* #8FE3A3 */
+    --muted-teal-rgb: 46 125 115;   /* #2E7D73 */
 
-    /* Light Theme Defaults */
-    --background: #FFFFFF;
-    --foreground: #1A1A1A;
-    --surface: #F4F6F6;
-    --border: #E5E7EB;
+    /* Theme Variables (using RGB to ensure /opacity works) */
+    --background-rgb: 255 255 255;
+    --foreground-rgb: 26 26 26;
+    --surface-rgb: 244 246 246;
+    --border-rgb: 229 231 235;
+
+    /* Semantic Mappings */
+    --background: rgb(var(--background-rgb));
+    --foreground: rgb(var(--foreground-rgb));
+    --surface: rgb(var(--surface-rgb));
+    --border: rgb(var(--border-rgb));
+
+    /* Legacy Hex for transition/gradients if needed */
+    --primary-teal: #0F8F7A;
+    --deep-teal: #0A5C4F;
+    --light-green: #5CCB6F;
     
     color-scheme: light;
   }
 
   .dark {
     /* Dark Theme Overrides */
-    --background: #030712;
-    --foreground: #F3F4F6;
-    --surface: rgba(31, 41, 55, 0.5); /* dark-800/50 */
-    --border: rgba(55, 65, 81, 0.5); /* dark-700/50 */
+    --background-rgb: 3 7 18;
+    --foreground-rgb: 243 244 246;
+    --surface-rgb: 31 41 55;
+    --border-rgb: 55 65 81;
     
     color-scheme: dark;
   }
@@ -131,7 +142,7 @@
   }
 
   .badge-success {
-    @apply badge bg-accent-light text-white;
+    @apply badge bg-light-green text-white;
   }
 
   /* Input styling (for future use) */
