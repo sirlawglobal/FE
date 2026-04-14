@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, BookOpen, Loader, Trash2, Eye, EyeOff, X, FolderPlus, Pencil, CheckCircle, FileText, Check, Award, AlertCircle } from 'lucide-react';
+import { Plus, BookOpen, Loader, Trash2, Eye, EyeOff, X, FolderPlus, Pencil, CheckCircle, FileText, Check, Award, AlertCircle, UploadCloud } from 'lucide-react';
 import { coursesService, type Course, type CreateCourseRequest, type CourseModule } from '../services/coursesService';
 import { lessonsService, type Lesson, type CreateLessonRequest, ContentType } from '../services/lessonsService';
 import { assignmentsService, type Assignment, type Submission, type CreateAssignmentRequest } from '../services/assignmentsService';
+import { mediaService } from '../services/mediaService';
 import { useAuthStore } from '../contexts/authContext';
 import AppLayout from '../components/layout/AppLayout';
 
@@ -56,6 +56,10 @@ export const InstructorDashboardPage: React.FC = () => {
   const [gradingSubmission, setGradingSubmission] = useState<Submission | null>(null);
   const [gradeForm, setGradeForm] = useState({ grade: 0, feedback: '' });
   const [isGrading, setIsGrading] = useState(false);
+  
+  // Video Upload States
+  const [isUploadingVideo, setIsUploadingVideo] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMyCourses();
@@ -189,6 +193,32 @@ export const InstructorDashboardPage: React.FC = () => {
       alert(err instanceof Error ? err.message : 'Failed to add lesson');
     } finally {
       setAddingLesson(false);
+    }
+  };
+
+  const handleVideoFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check size (100MB limit matching backend)
+    if (file.size > 100 * 1024 * 1024) {
+      setUploadError('File is too large (max 100MB)');
+      return;
+    }
+
+    try {
+      setIsUploadingVideo(true);
+      setUploadError(null);
+      const response = await mediaService.uploadVideo(file);
+      setLessonForm(prev => ({ 
+        ...prev, 
+        contentUrl: response.url,
+        contentType: ContentType.VIDEO // Auto-set to video upon upload
+      }));
+    } catch (err) {
+      setUploadError('Failed to upload video. Please try again.');
+    } finally {
+      setIsUploadingVideo(false);
     }
   };
 
@@ -553,7 +583,31 @@ export const InstructorDashboardPage: React.FC = () => {
                       {showAddLesson === mod.id && (
                         <div className="bg-slate-950/40 rounded-xl p-4 mt-3 space-y-3 border border-emerald-500/20 animate-in slide-in-from-top-1 duration-200">
                           <input type="text" value={lessonForm.title} onChange={(e) => setLessonForm(prev => ({ ...prev, title: e.target.value }))} placeholder="Lesson title" className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm outline-none" />
-                          <input type="text" value={lessonForm.contentUrl} onChange={(e) => setLessonForm(prev => ({ ...prev, contentUrl: e.target.value }))} placeholder="Content URL or Text" className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm outline-none" />
+                          <div className="space-y-1">
+                            <label className="text-[10px] text-slate-500 font-bold uppercase ml-1">Content (URL or Upload)</label>
+                            <div className="flex gap-2">
+                              <input 
+                                type="text" 
+                                value={lessonForm.contentUrl} 
+                                onChange={(e) => setLessonForm(prev => ({ ...prev, contentUrl: e.target.value }))} 
+                                placeholder={isUploadingVideo ? 'Uploading...' : 'Content URL or Text'} 
+                                disabled={isUploadingVideo}
+                                className="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm outline-none focus:ring-1 focus:ring-primary-teal transition-all" 
+                              />
+                              <label className={`flex items-center justify-center p-2 rounded-lg cursor-pointer transition-all ${isUploadingVideo ? 'bg-slate-800 text-slate-600' : 'bg-primary-teal/10 text-primary-teal hover:bg-primary-teal/20'}`}>
+                                <input 
+                                  type="file" 
+                                  className="hidden" 
+                                  accept="video/*" 
+                                  onChange={handleVideoFileUpload}
+                                  disabled={isUploadingVideo}
+                                />
+                                {isUploadingVideo ? <Loader className="w-4 h-4 animate-spin" /> : <UploadCloud className="w-4 h-4" />}
+                              </label>
+                            </div>
+                            {uploadError && <p className="text-[10px] text-red-400 ml-1">{uploadError}</p>}
+                          </div>
+                          
                           <select value={lessonForm.contentType} onChange={(e) => setLessonForm(prev => ({ ...prev, contentType: e.target.value as ContentType }))} className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white text-sm outline-none">
                             <option value={ContentType.TEXT}>Text</option>
                             <option value={ContentType.VIDEO}>Video</option>

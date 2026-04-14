@@ -5,3 +5,4 @@ export * from './lessonsService';
 export * from './dashboardService';
 export * from './collaborationService';
 export * from './assignmentsService';
+export * from './mediaService';
