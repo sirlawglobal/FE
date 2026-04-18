@@ -11,7 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   BarChart2,
-  ClipboardList
+  ClipboardList,
+  FileText
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -29,6 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/courses', label: 'Explore Courses', icon: BookOpen },
     { path: '/my-courses', label: 'My Learning', icon: GraduationCap },
+    { path: '/my-submissions', label: 'My Submissions', icon: FileText },
     { path: '/analytics', label: 'Analytics', icon: BarChart2 },
     { path: '/discussions', label: 'Discussions', icon: MessageSquare },
   ] : [

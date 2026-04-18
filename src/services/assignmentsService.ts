@@ -103,6 +103,15 @@ class AssignmentsService {
     }
   }
 
+  async getMyAllSubmissions(): Promise<Submission[]> {
+    try {
+      const response = await apiClient.get<Submission[]>('/submissions/my-submissions/all');
+      return response.data;
+    } catch (error: unknown) {
+      throw this.handleError(error);
+    }
+  }
+
   async getSubmissionsForAssignment(assignmentId: string): Promise<Submission[]> {
     try {
       const response = await apiClient.get<Submission[]>(`/submissions/assignment/${assignmentId}`);

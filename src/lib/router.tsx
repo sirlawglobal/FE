@@ -14,6 +14,7 @@ import LessonViewerPage from '../pages/LessonViewerPage';
 import DiscussionsPage from '../pages/DiscussionsPage';
 import InstructorDashboardPage from '../pages/InstructorDashboardPage';
 import InstructorSubmissionsPage from '../pages/InstructorSubmissionsPage';
+import StudentSubmissionsPage from '../pages/StudentSubmissionsPage';
 import LandingPage from '../pages/LandingPage';
 import TeamsPage from '../pages/TeamsPage';
 import AnalyticsDashboardPage from '../pages/AnalyticsDashboardPage';
@@ -78,6 +79,7 @@ const Router: React.FC = () => {
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path="/my-courses" element={<ProtectedRoute><MyCoursesPage /></ProtectedRoute>} />
+        <Route path="/my-submissions" element={<ProtectedRoute><StudentSubmissionsPage /></ProtectedRoute>} />
         <Route path="/lessons/:id" element={<ProtectedRoute><LessonViewerPage /></ProtectedRoute>} />
         <Route path="/discussions" element={<ProtectedRoute><DiscussionsPage /></ProtectedRoute>} />
         <Route path="/instructor" element={<ProtectedRoute><InstructorDashboardPage /></ProtectedRoute>} />
