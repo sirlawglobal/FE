@@ -26,6 +26,15 @@ export interface Submission {
     lastName: string;
     email: string;
   };
+  assignment?: {
+    id: string;
+    title: string;
+    points: number;
+    course?: {
+      id: string;
+      title: string;
+    };
+  };
 }
 
 export interface CreateAssignmentRequest {
@@ -97,6 +106,15 @@ class AssignmentsService {
   async getSubmissionsForAssignment(assignmentId: string): Promise<Submission[]> {
     try {
       const response = await apiClient.get<Submission[]>(`/submissions/assignment/${assignmentId}`);
+      return response.data;
+    } catch (error: unknown) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getAllInstructorSubmissions(): Promise<Submission[]> {
+    try {
+      const response = await apiClient.get<Submission[]>('/submissions/instructor/all');
       return response.data;
     } catch (error: unknown) {
       throw this.handleError(error);

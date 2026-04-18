@@ -13,6 +13,7 @@ import MyCoursesPage from '../pages/MyCoursesPage';
 import LessonViewerPage from '../pages/LessonViewerPage';
 import DiscussionsPage from '../pages/DiscussionsPage';
 import InstructorDashboardPage from '../pages/InstructorDashboardPage';
+import InstructorSubmissionsPage from '../pages/InstructorSubmissionsPage';
 import LandingPage from '../pages/LandingPage';
 import TeamsPage from '../pages/TeamsPage';
 import AnalyticsDashboardPage from '../pages/AnalyticsDashboardPage';
@@ -80,6 +81,7 @@ const Router: React.FC = () => {
         <Route path="/lessons/:id" element={<ProtectedRoute><LessonViewerPage /></ProtectedRoute>} />
         <Route path="/discussions" element={<ProtectedRoute><DiscussionsPage /></ProtectedRoute>} />
         <Route path="/instructor" element={<ProtectedRoute><InstructorDashboardPage /></ProtectedRoute>} />
+        <Route path="/instructor/submissions" element={<ProtectedRoute><InstructorSubmissionsPage /></ProtectedRoute>} />
         <Route path="/analytics" element={<ProtectedRoute><AnalyticsDashboardPage /></ProtectedRoute>} />
 
         {/* Catch all */}

@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   BarChart2,
+  ClipboardList
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -37,6 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 
   if (isInstructor || isAdmin) {
     navItems.push({ path: '/instructor', label: 'Instructor Panel', icon: Settings });
+    navItems.push({ path: '/instructor/submissions', label: 'All Submissions', icon: ClipboardList });
   }
 
   const isActive = (path: string) => {
